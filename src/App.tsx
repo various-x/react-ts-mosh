@@ -1,38 +1,37 @@
 import { useState } from "react";
-import Alert from "./components/Alert";
-import Button from "./components/Button";
-import ListGroup from "./components/ListGroup";
-import Like from "./components/Like";
-
+import Chapter1to5 from "./components/001~005/Chapter1to5";
+import styled from "styled-components";
+import Chapter6 from "./components/006/Chapter6";
+import './index.css';
+const Button = styled.button`
+  background-color: "#c9c9c9";
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 4px;
+  margin: 8px 0;
+`;
 function App() {
-  const listItems = [
-    "New York",
-    "San Francisco",
-    "Tokyo",
-    "London",
-    "Shanghai",
-  ];
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
-  const [alertVisible, setAlertVisible] = useState(false);
+  const [showC1ToC5, setShowC1ToC5] = useState(false);
+  const [showC6, setShowC6] = useState(true);
   return (
-    <div>
-      <ListGroup
-        listItems={listItems}
-        heading="Cities"
-        onSelectItem={handleSelectItem}
-      />
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisible(false)}>
-          <span>This </span> is a primary alert—check it out!
-        </Alert>
-      )}
-      <Button color="primary" onClick={() => setAlertVisible(true)}>
-        My Button
-      </Button>
-      <Like onClick={() => console.log("clicked")} />
-    </div>
+    <>
+      <div>
+        <Button onClick={() => setShowC1ToC5(!showC1ToC5)}>
+          {showC1ToC5
+            ? "hide chapter 1 to 5 content"
+            : "show chapter 1 to 5 content"}
+        </Button>
+        {showC1ToC5 && <Chapter1to5 />}
+      </div>
+      <div>
+        <Button onClick={() => setShowC6(!showC6)}>
+          {showC6
+            ? "hide chapter 6 content"
+            : "show chapter 6 content"}
+        </Button>
+        {showC6 && <Chapter6 />}
+      </div>
+    </>
   );
 }
 
